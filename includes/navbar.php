@@ -21,8 +21,8 @@
         </li>
         <?php if(!isset($_SESSION['loggedIn'])) : ?>
         <li class="nav-item">
-          <a class="nav-link" href="admins-create.php">
-            <i class="fas fa-user-plus me-1"></i>Create Account
+          <a class="nav-link" href="tenant-register.php">
+            <i class="fas fa-building me-1"></i>Start Free Trial
           </a>
         </li>
         <?php endif; ?>
@@ -58,6 +58,31 @@
                 <?= ucfirst($_SESSION['loggedInUser']['role']); ?>
               </span>
             </li>
+            <?php if(isset($_SESSION['loggedInUser']['tenant_id'])): ?>
+            <?php 
+            $companyInfo = getCompanyDisplayInfo($_SESSION['loggedInUser']['tenant_id']);
+            ?>
+            <li>
+              <span class="dropdown-item-text">
+                <i class="fas fa-building me-1"></i>
+                <strong><?= $companyInfo['name']; ?></strong>
+              </span>
+            </li>
+            <li>
+              <span class="dropdown-item-text text-muted small">
+                <i class="fas fa-crown me-1"></i>
+                <?= $companyInfo['subscription']; ?> Plan
+              </span>
+            </li>
+            <?php if($_SESSION['loggedInUser']['role'] == 'admin'): ?>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <a class="dropdown-item" href="tenant-settings.php">
+                <i class="fas fa-cog me-1"></i>Company Settings
+              </a>
+            </li>
+            <?php endif; ?>
+            <?php endif; ?>
             <li><hr class="dropdown-divider"></li>
             <li>
               <a class="dropdown-item text-danger" href="logout.php">

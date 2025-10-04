@@ -17,11 +17,12 @@
             </div>
 
             <?php
-            // Fetch products with category
+            // Fetch products with category (tenant-filtered)
             $productsQuery = "
                 SELECT p.*, c.name AS category_name
                 FROM products p
                 LEFT JOIN categories c ON p.category_id = c.id
+                WHERE p.tenant_id = '" . $_SESSION['loggedInUser']['tenant_id'] . "'
             ";
             $products = mysqli_query($conn, $productsQuery);
 

@@ -46,6 +46,7 @@ if (isset($_POST['loginBtn'])) {
                 'name' => $row['name'],
                 'email' => $row['email'],
                 'role' => $userRole, // Use role from database
+                'tenant_id' => $row['tenant_id'] // Add tenant_id to session
             ];
 
             // Redirect based on role from database

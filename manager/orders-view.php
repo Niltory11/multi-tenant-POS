@@ -29,6 +29,7 @@
 
                 $query = "SELECT o.*, c.* FROM orders o, customers c 
                           WHERE c.id = o.customer_id AND tracking_no='$trackingNo' 
+                          AND o.tenant_id = '" . $_SESSION['loggedInUser']['tenant_id'] . "'
                           ORDER BY o.id DESC";
 
                 $orders = mysqli_query($conn, $query);

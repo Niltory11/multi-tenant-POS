@@ -30,7 +30,7 @@ $dues = $_POST['due']; // Dues
 
 foreach ($products as $index => $productId) {
 $quantity = $quantities[$index];
-$productQuery = "SELECT price FROM products WHERE id='$productId' LIMIT 1";
+$productQuery = "SELECT price FROM products WHERE id='$productId' AND tenant_id='$tenant_id' LIMIT 1";
 $productResult = mysqli_query($conn, $productQuery);
 $product = mysqli_fetch_assoc($productResult);
 
@@ -38,9 +38,10 @@ $productDiscount = $discounts[$index] ?? 0; // Individual product discount
 $totalAmount += ($product['price'] * $quantity) - $productDiscount; // Calculate total considering discount
 }
 
-// Insert the order
-$orderQuery = "INSERT INTO orders (customer_id, tracking_no, total_amount, order_status, discount, advance, due, delivery_date, description, order_date)
-VALUES ('$customerId', '$trackingNo', '$totalAmount', '$orderStatus', '$discount', '$advance', '$due', '$deliveryDate', '$description', NOW())";
+// Insert the order with tenant_id
+$tenant_id = $_SESSION['loggedInUser']['tenant_id'];
+$orderQuery = "INSERT INTO orders (tenant_id, customer_id, tracking_no, total_amount, order_status, discount, advance, due, delivery_date, description, order_date)
+VALUES ('$tenant_id', '$customerId', '$trackingNo', '$totalAmount', '$orderStatus', '$discount', '$advance', '$due', '$deliveryDate', '$description', NOW())";
 $orderResult = mysqli_query($conn, $orderQuery);
 if ($orderResult) {
 $orderId = mysqli_insert_id($conn);
@@ -48,7 +49,7 @@ $orderId = mysqli_insert_id($conn);
 // Insert order items and update product quantities
 foreach ($products as $index => $productId) {
 $quantity = $quantities[$index];
-$productQuery = "SELECT price, quantity FROM products WHERE id='$productId' LIMIT 1"; // Use 'quantity' directly
+$productQuery = "SELECT price, quantity FROM products WHERE id='$productId' AND tenant_id='$tenant_id' LIMIT 1"; // Use 'quantity' directly
 $productResult = mysqli_query($conn, $productQuery);
 $product = mysqli_fetch_assoc($productResult);
 
@@ -70,7 +71,7 @@ mysqli_query($conn, $orderItemQuery);
 
 // Update the product quantity in stock
 $newQuantity = $product['quantity'] - $quantity; // Adjust the stock
-$updateProductQuery = "UPDATE products SET quantity='$newQuantity' WHERE id='$productId'";
+$updateProductQuery = "UPDATE products SET quantity='$newQuantity' WHERE id='$productId' AND tenant_id='$tenant_id'";
 mysqli_query($conn, $updateProductQuery);
 }
 
@@ -96,7 +97,8 @@ echo '<div class="alert alert-danger">Failed to create order. Please try again.<
 <select id="customer_id" name="customer_id" class="form-select mySelect2" required>
 <option value="" disabled selected>Select Customer</option>
 <?php
-$customers = mysqli_query($conn, "SELECT * FROM customers");
+$tenant_id = $_SESSION['loggedInUser']['tenant_id'];
+$customers = mysqli_query($conn, "SELECT * FROM customers WHERE tenant_id='$tenant_id'");
 while ($customer = mysqli_fetch_assoc($customers)) {
 echo "<option value='{$customer['id']}'>{$customer['name']}</option>";
 }
@@ -123,7 +125,7 @@ echo "<option value='{$customer['id']}'>{$customer['name']}</option>";
 <select name="products[]" class="form-select mySelect2" required>
 <option value="" disabled selected>Select Product</option>
 <?php
-$products = mysqli_query($conn, "SELECT * FROM products");
+$products = mysqli_query($conn, "SELECT * FROM products WHERE tenant_id='$tenant_id'");
 while ($product = mysqli_fetch_assoc($products)) {
 echo "<option value='{$product['id']}' data-price='{$product['price']}'>{$product['name']}</option>";
 }
@@ -225,7 +227,7 @@ const newProductRow = `
 <select name="products[]" class="form-select mySelect2" required>
                                 <option value="" disabled selected>Select Product</option>
                                 <?php
-                                $products = mysqli_query($conn, "SELECT * FROM products");
+                                $products = mysqli_query($conn, "SELECT * FROM products WHERE tenant_id='$tenant_id'");
                                 while ($product = mysqli_fetch_assoc($products)) {
                                     echo "<option value='{$product['id']}' data-price='{$product['price']}'>{$product['name']}</option>";
                                 }

@@ -51,7 +51,7 @@
                               LEFT JOIN customers c ON c.id = o.customer_id
                               LEFT JOIN order_items oi ON oi.order_id = o.id
                               LEFT JOIN products p ON p.id = oi.product_id
-                              WHERE o.order_date BETWEEN '$fromDate' AND '$toDate'
+                              WHERE o.order_date BETWEEN '$fromDate' AND '$toDate' AND o.tenant_id = '" . $_SESSION['loggedInUser']['tenant_id'] . "'
                               ORDER BY o.id DESC";
 
                 } elseif($fromDate != '' && $toDate != '' && $paymentStatus != '') {
@@ -61,7 +61,7 @@
                               LEFT JOIN order_items oi ON oi.order_id = o.id
                               LEFT JOIN products p ON p.id = oi.product_id
                               WHERE o.order_date BETWEEN '$fromDate' AND '$toDate' 
-                              AND o.payment_mode='$paymentStatus'
+                              AND o.payment_mode='$paymentStatus' AND o.tenant_id = '" . $_SESSION['loggedInUser']['tenant_id'] . "'
                               ORDER BY o.id DESC";
 
                 } elseif ($fromDate != '' && $toDate == '' && $paymentStatus == '') {
@@ -70,7 +70,7 @@
                               LEFT JOIN customers c ON c.id = o.customer_id
                               LEFT JOIN order_items oi ON oi.order_id = o.id
                               LEFT JOIN products p ON p.id = oi.product_id
-                              WHERE o.order_date >= '$fromDate'
+                              WHERE o.order_date >= '$fromDate' AND o.tenant_id = '" . $_SESSION['loggedInUser']['tenant_id'] . "'
                               ORDER BY o.id DESC";
 
                 } elseif ($fromDate == '' && $toDate != '' && $paymentStatus == '') {
@@ -79,7 +79,7 @@
                               LEFT JOIN customers c ON c.id = o.customer_id
                               LEFT JOIN order_items oi ON oi.order_id = o.id
                               LEFT JOIN products p ON p.id = oi.product_id
-                              WHERE o.order_date <= '$toDate'
+                              WHERE o.order_date <= '$toDate' AND o.tenant_id = '" . $_SESSION['loggedInUser']['tenant_id'] . "'
                               ORDER BY o.id DESC";
 
                 } elseif ($paymentStatus != '') {
@@ -88,7 +88,7 @@
                               LEFT JOIN customers c ON c.id = o.customer_id
                               LEFT JOIN order_items oi ON oi.order_id = o.id
                               LEFT JOIN products p ON p.id = oi.product_id
-                              WHERE o.payment_mode='$paymentStatus'
+                              WHERE o.payment_mode='$paymentStatus' AND o.tenant_id = '" . $_SESSION['loggedInUser']['tenant_id'] . "'
                               ORDER BY o.id DESC";
 
                 } else {
@@ -97,6 +97,7 @@
                               LEFT JOIN customers c ON c.id = o.customer_id
                               LEFT JOIN order_items oi ON oi.order_id = o.id
                               LEFT JOIN products p ON p.id = oi.product_id
+                              WHERE o.tenant_id = '" . $_SESSION['loggedInUser']['tenant_id'] . "'
                               ORDER BY o.id DESC";
                 }
             } else {
@@ -105,6 +106,7 @@
                           LEFT JOIN customers c ON c.id = o.customer_id
                           LEFT JOIN order_items oi ON oi.order_id = o.id
                           LEFT JOIN products p ON p.id = oi.product_id
+                          WHERE o.tenant_id = '" . $_SESSION['loggedInUser']['tenant_id'] . "'
                           ORDER BY o.id DESC";
             }
             $orders = mysqli_query($conn, $query);

@@ -73,32 +73,54 @@ function update($tableName, $id, $data){
     return $result;
 }
 
-function getAll($tableName, $status = NULL){
+function getAll($tableName, $status = NULL, $tenant_id = NULL){
 
     global $conn;
 
     $table = validate($tableName);
     $status = validate($status);
+    $tenant_id = validate($tenant_id);
+
+    // Get tenant_id from session if not provided
+    if (!$tenant_id && isset($_SESSION['loggedInUser']['tenant_id'])) {
+        $tenant_id = $_SESSION['loggedInUser']['tenant_id'];
+    }
+
+    $whereClause = "";
+    if ($tenant_id) {
+        $whereClause = "WHERE tenant_id='$tenant_id'";
+    }
 
     if($status == 'status')
     {
-        $query = "SELECT * FROM $table WHERE status='0'";
+        $query = "SELECT * FROM $table WHERE status='0'" . ($whereClause ? " AND tenant_id='$tenant_id'" : "");
     }
     else
     {
-        $query = "SELECT * FROM $table";
+        $query = "SELECT * FROM $table " . $whereClause;
     }
     return mysqli_query($conn, $query);
 }
 
-function getById($tableName, $id){
+function getById($tableName, $id, $tenant_id = NULL){
 
     global $conn;
 
     $table = validate($tableName);
     $id = validate($id);
+    $tenant_id = validate($tenant_id);
 
-    $query = "SELECT * FROM $table WHERE id='$id' LIMIT 1";
+    // Get tenant_id from session if not provided
+    if (!$tenant_id && isset($_SESSION['loggedInUser']['tenant_id'])) {
+        $tenant_id = $_SESSION['loggedInUser']['tenant_id'];
+    }
+
+    $whereClause = "id='$id'";
+    if ($tenant_id) {
+        $whereClause .= " AND tenant_id='$tenant_id'";
+    }
+
+    $query = "SELECT * FROM $table WHERE $whereClause LIMIT 1";
     $result = mysqli_query($conn, $query);
 
     if($result){
@@ -194,6 +216,114 @@ function getCount($tableName)
     }else{
         return 'Something Went Wrong!';
     }
+}
+
+// Get tenant company information
+function getTenantInfo($tenant_id = NULL)
+{
+    global $conn;
+
+    if (!$tenant_id && isset($_SESSION['loggedInUser']['tenant_id'])) {
+        $tenant_id = $_SESSION['loggedInUser']['tenant_id'];
+    }
+
+    if (!$tenant_id) {
+        return null;
+    }
+
+    $tenant_id = validate($tenant_id);
+    $query = "SELECT * FROM tenants WHERE tenant_id='$tenant_id' LIMIT 1";
+    $result = mysqli_query($conn, $query);
+
+    if ($result && mysqli_num_rows($result) == 1) {
+        return mysqli_fetch_assoc($result);
+    }
+    
+    return null;
+}
+
+// Get company name for display
+function getCompanyName($tenant_id = NULL)
+{
+    $tenant = getTenantInfo($tenant_id);
+    return $tenant ? $tenant['company_name'] : 'Unknown Company';
+}
+
+// Get company display info (name + subscription)
+function getCompanyDisplayInfo($tenant_id = NULL)
+{
+    $tenant = getTenantInfo($tenant_id);
+    if ($tenant) {
+        $subscription = ucfirst($tenant['subscription_plan']);
+        return [
+            'name' => $tenant['company_name'],
+            'subscription' => $subscription,
+            'status' => ucfirst($tenant['subscription_status'])
+        ];
+    }
+    return [
+        'name' => 'Unknown Company',
+        'subscription' => 'Basic',
+        'status' => 'Active'
+    ];
+}
+
+// Add tenant filtering to WHERE clause
+function addTenantFilter($whereClause = '', $tenant_id = NULL)
+{
+    if (!$tenant_id && isset($_SESSION['loggedInUser']['tenant_id'])) {
+        $tenant_id = $_SESSION['loggedInUser']['tenant_id'];
+    }
+    
+    if ($tenant_id) {
+        $tenant_id = validate($tenant_id);
+        $filter = "tenant_id = '$tenant_id'";
+        
+        if ($whereClause) {
+            return $whereClause . " AND " . $filter;
+        } else {
+            return "WHERE " . $filter;
+        }
+    }
+    
+    return $whereClause;
+}
+
+// Execute query with tenant filtering
+function executeTenantQuery($query, $tenant_id = NULL)
+{
+    global $conn;
+    
+    // Add tenant filter to the query
+    $filteredQuery = addTenantFilterToQuery($query, $tenant_id);
+    return mysqli_query($conn, $filteredQuery);
+}
+
+// Add tenant filter to existing query
+function addTenantFilterToQuery($query, $tenant_id = NULL)
+{
+    if (!$tenant_id && isset($_SESSION['loggedInUser']['tenant_id'])) {
+        $tenant_id = $_SESSION['loggedInUser']['tenant_id'];
+    }
+    
+    if (!$tenant_id) {
+        return $query;
+    }
+    
+    $tenant_id = validate($tenant_id);
+    
+    // Check if query already has WHERE clause
+    if (stripos($query, 'WHERE') !== false) {
+        // Add tenant filter to existing WHERE clause
+        $query = str_replace('WHERE ', "WHERE tenant_id = '$tenant_id' AND ", $query);
+    } else {
+        // Add WHERE clause with tenant filter
+        $query = str_replace('FROM ', "FROM ", $query);
+        $query = str_replace('ORDER BY', "WHERE tenant_id = '$tenant_id' ORDER BY", $query);
+        $query = str_replace('GROUP BY', "WHERE tenant_id = '$tenant_id' GROUP BY", $query);
+    }
+    
+    return $query;
 }
 
 
