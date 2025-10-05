@@ -46,7 +46,9 @@
                     <h5 class="card-title text-danger">Total Customers</h5>
                     <h4 class="fw-bold text-danger">
                         <?php
-                        $customerQuery = "SELECT COUNT(*) AS total_customers FROM customers";
+                        // Get tenant_id from logged-in user session for filtering
+                        $tenant_id = isset($_SESSION['loggedInUser']['tenant_id']) ? $_SESSION['loggedInUser']['tenant_id'] : 'default';
+                        $customerQuery = "SELECT COUNT(*) AS total_customers FROM customers WHERE tenant_id = '$tenant_id'";
                         $customerResult = mysqli_query($conn, $customerQuery);
                         $customerData = mysqli_fetch_assoc($customerResult);
                         echo $customerData['total_customers'];
@@ -64,7 +66,7 @@
                     <h5 class="card-title text-primary">Total Categories</h5>
                     <h4 class="fw-bold text-primary">
                         <?php
-                        $categoryQuery = "SELECT COUNT(*) AS total_category FROM categories";
+                        $categoryQuery = "SELECT COUNT(*) AS total_category FROM categories WHERE tenant_id = '$tenant_id'";
                         $categoryResult = mysqli_query($conn, $categoryQuery);
                         $categoryData = mysqli_fetch_assoc($categoryResult);
                         echo $categoryData['total_category'];
@@ -82,7 +84,7 @@
                     <h5 class="card-title text-warning">Total Products</h5>
                     <h4 class="fw-bold text-warning">
                         <?php
-                        $productQuery = "SELECT COUNT(*) AS total_products FROM products";
+                        $productQuery = "SELECT COUNT(*) AS total_products FROM products WHERE tenant_id = '$tenant_id'";
                         $productResult = mysqli_query($conn, $productQuery);
                         $productData = mysqli_fetch_assoc($productResult);
                         echo $productData['total_products'];
@@ -100,7 +102,7 @@
                     <h5 class="card-title text-success">Total Admins</h5>
                     <h4 class="fw-bold text-success">
                         <?php
-                        $adminQuery = "SELECT COUNT(*) AS total_admins FROM admins";
+                        $adminQuery = "SELECT COUNT(*) AS total_admins FROM admins WHERE tenant_id = '$tenant_id'";
                         $adminResult = mysqli_query($conn, $adminQuery);
                         $adminData = mysqli_fetch_assoc($adminResult);
                         echo $adminData['total_admins'];
@@ -129,7 +131,7 @@
                                            COALESCE(SUM(total_amount), 0) AS total_sales, 
                                            COALESCE(SUM(due), 0) AS total_due 
                                     FROM orders 
-                                    WHERE DATE(order_date) = CURDATE()";
+                                    WHERE DATE(order_date) = CURDATE() AND tenant_id = '$tenant_id'";
                 $todaySalesResult = mysqli_query($conn, $todaySalesQuery);
                 $todaySalesData = mysqli_fetch_assoc($todaySalesResult);
                 $netTodaySales = ($todaySalesData['total_sales'] ?? 0) - ($todaySalesData['total_due'] ?? 0);
@@ -151,7 +153,7 @@
                 $totalSalesQuery = "SELECT COUNT(*) AS order_count, 
                                            COALESCE(SUM(total_amount), 0) AS total_sales, 
                                            COALESCE(SUM(due), 0) AS total_due 
-                                    FROM orders";
+                                    FROM orders WHERE tenant_id = '$tenant_id'";
                 $totalSalesResult = mysqli_query($conn, $totalSalesQuery);
                 $totalSalesData = mysqli_fetch_assoc($totalSalesResult);
                 $netTotalSales = ($totalSalesData['total_sales'] ?? 0) - ($totalSalesData['total_due'] ?? 0);
@@ -196,7 +198,9 @@
                     <h5 class="card-title text-danger">Today's Expenses</h5>
                     
                     <?php
-                    $todayExpensesQuery = "SELECT SUM(amount) AS today_expenses FROM expenses WHERE DATE(expense_date) = CURDATE()";
+                    // Get tenant_id from logged-in user session for filtering
+                    $tenant_id = isset($_SESSION['loggedInUser']['tenant_id']) ? $_SESSION['loggedInUser']['tenant_id'] : 'default';
+                    $todayExpensesQuery = "SELECT SUM(amount) AS today_expenses FROM expenses WHERE DATE(expense_date) = CURDATE() AND tenant_id = '$tenant_id'";
                     $todayExpensesResult = mysqli_query($conn, $todayExpensesQuery);
                     $todayExpensesData = mysqli_fetch_assoc($todayExpensesResult);
                     ?>
@@ -215,7 +219,7 @@
                     
 
                     <?php
-                    $totalExpensesQuery = "SELECT SUM(amount) AS total_expenses FROM expenses";
+                    $totalExpensesQuery = "SELECT SUM(amount) AS total_expenses FROM expenses WHERE tenant_id = '$tenant_id'";
                     $totalExpensesResult = mysqli_query($conn, $totalExpensesQuery);
                     $totalExpensesData = mysqli_fetch_assoc($totalExpensesResult);
                     ?>

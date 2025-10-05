@@ -10,6 +10,9 @@ if (isset($_POST['saveAdmin'])) {
     $phone = validate($_POST['phone']);
     $role = validate($_POST['role']); // Role field (admin, manager, salesman)
     $is_ban = isset($_POST['is_ban']) ? 1 : 0;
+    
+    // Get tenant_id from logged-in user session
+    $tenant_id = isset($_SESSION['loggedInUser']['tenant_id']) ? $_SESSION['loggedInUser']['tenant_id'] : 'default';
 
     if (!empty($name) && !empty($email) && !empty($password)) {
         $data = [
@@ -18,7 +21,8 @@ if (isset($_POST['saveAdmin'])) {
             'password' => $password,
             'phone' => $phone,
             'role' => $role,
-            'is_ban' => $is_ban
+            'is_ban' => $is_ban,
+            'tenant_id' => $tenant_id
         ];
 
         $result = insert('admins', $data);
@@ -148,6 +152,9 @@ if(isset($_POST['saveProduct']))
         $finalImage = '';
     }
 
+    // Get tenant_id from logged-in user session
+    $tenant_id = isset($_SESSION['loggedInUser']['tenant_id']) ? $_SESSION['loggedInUser']['tenant_id'] : 'default';
+
     $data = [
         'category_id' => $category_id,
         'name' => $name,
@@ -168,7 +175,8 @@ if(isset($_POST['saveProduct']))
 
 
         'image' => $finalImage,
-        'status' => $status
+        'status' => $status,
+        'tenant_id' => $tenant_id
     ];
 
     $result = insert('products',$data);
@@ -186,12 +194,16 @@ if (isset($_POST['saveCategory'])) {
     $name = validate($_POST['name']);
     $description = validate($_POST['description']);
     $status = isset($_POST['status']) ? 1 : 0; // Status for visibility
+    
+    // Get tenant_id from logged-in user session
+    $tenant_id = isset($_SESSION['loggedInUser']['tenant_id']) ? $_SESSION['loggedInUser']['tenant_id'] : 'default';
 
     if (!empty($name)) {
         $data = [
             'name' => $name,
             'description' => $description,
-            'status' => $status
+            'status' => $status,
+            'tenant_id' => $tenant_id
         ];
 
         $result = insert('categories', $data);

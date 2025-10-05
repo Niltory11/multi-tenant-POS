@@ -9,10 +9,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Automatically set the current date
     $expenseDateForDB = date('Y-m-d');
 
+    // Get tenant_id from logged-in user session
+    $tenant_id = isset($_SESSION['loggedInUser']['tenant_id']) ? $_SESSION['loggedInUser']['tenant_id'] : 'default';
+    
     // Convert PDO statements to MySQLi
-    $query = "INSERT INTO expenses (expense_date, category, amount, description, created_at) VALUES (?, ?, ?, ?, NOW())";
+    $query = "INSERT INTO expenses (expense_date, category, amount, description, tenant_id, created_at) VALUES (?, ?, ?, ?, ?, NOW())";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param('ssds', $expenseDateForDB, $expenseCategory, $expenseAmount, $expenseDescription);
+    $stmt->bind_param('ssdss', $expenseDateForDB, $expenseCategory, $expenseAmount, $expenseDescription, $tenant_id);
 
     if ($stmt->execute()) {
         echo '<div class="alert alert-success" role="alert">Expense added successfully!</div>';

@@ -16,19 +16,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $startDate = $_POST['start_date'];
     $endDate = $_POST['end_date'];
 
+    // Get tenant_id from logged-in user session for filtering
+    $tenant_id = isset($_SESSION['loggedInUser']['tenant_id']) ? $_SESSION['loggedInUser']['tenant_id'] : 'default';
+    
     // Fetch expenses based on the selected category and date range
-    $query = "SELECT * FROM expenses WHERE category = ? AND expense_date BETWEEN ? AND ? ORDER BY expense_date DESC";
+    $query = "SELECT * FROM expenses WHERE category = ? AND expense_date BETWEEN ? AND ? AND tenant_id = ? ORDER BY expense_date DESC";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param('sss', $selectedCategory, $startDate, $endDate);
+    $stmt->bind_param('ssss', $selectedCategory, $startDate, $endDate, $tenant_id);
     $stmt->execute();
     $result = $stmt->get_result();
     $expenses = $result->fetch_all(MYSQLI_ASSOC);
     $stmt->close();
 } else {
+    // Get tenant_id from logged-in user session for filtering
+    $tenant_id = isset($_SESSION['loggedInUser']['tenant_id']) ? $_SESSION['loggedInUser']['tenant_id'] : 'default';
+    
     // Fetch all expenses if no filters are applied
-    $query = "SELECT * FROM expenses ORDER BY expense_date DESC";
-    $result = $conn->query($query);
+    $query = "SELECT * FROM expenses WHERE tenant_id = ? ORDER BY expense_date DESC";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('s', $tenant_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
     $expenses = $result->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
 }
 
 // Calculate the total amount of expenses

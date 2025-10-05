@@ -11,7 +11,9 @@
             <?php alertMessage(); ?>
 
             <?php
-            $admins = getAll('admins');
+            // Get tenant_id from logged-in user session for filtering
+            $tenant_id = isset($_SESSION['loggedInUser']['tenant_id']) ? $_SESSION['loggedInUser']['tenant_id'] : 'default';
+            $admins = getAll('admins', null, $tenant_id);
             if(!$admins){
                 echo '<h4>Something Went Wrong!</h4>';
                 return false;

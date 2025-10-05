@@ -65,8 +65,8 @@ $productAdvance = $advances[$index] ?? 0;
 $productDue = $dues[$index] ?? 0;
 $productDescription = $productDescriptions[$index]; // Retrieve product description
 
-$orderItemQuery = "INSERT INTO order_items (order_id, product_id, price, quantity, discount, advance, due, unit, descriptions)
-VALUES ('$orderId', '$productId', '$price', '$quantity', '$productDiscount', '$productAdvance', '$productDue', '$unit', '$productDescription')";
+$orderItemQuery = "INSERT INTO order_items (order_id, product_id, price, quantity, discount, advance, due, unit, descriptions, tenant_id)
+VALUES ('$orderId', '$productId', '$price', '$quantity', '$productDiscount', '$productAdvance', '$productDue', '$unit', '$productDescription', '$tenant_id')";
 mysqli_query($conn, $orderItemQuery);
 
 // Update the product quantity in stock

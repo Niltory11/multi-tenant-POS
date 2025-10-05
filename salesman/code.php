@@ -10,6 +10,9 @@ if (isset($_POST['saveAdmin'])) {
     $phone = validate($_POST['phone']);
     $role = validate($_POST['role']); // Role field (admin, manager, salesman)
     $is_ban = isset($_POST['is_ban']) ? 1 : 0;
+    
+    // Get tenant_id from logged-in user session
+    $tenant_id = isset($_SESSION['loggedInUser']['tenant_id']) ? $_SESSION['loggedInUser']['tenant_id'] : 'default';
 
     if (!empty($name) && !empty($email) && !empty($password)) {
         $data = [
@@ -18,7 +21,8 @@ if (isset($_POST['saveAdmin'])) {
             'password' => $password,
             'phone' => $phone,
             'role' => $role,
-            'is_ban' => $is_ban
+            'is_ban' => $is_ban,
+            'tenant_id' => $tenant_id
         ];
 
         $result = insert('admins', $data);

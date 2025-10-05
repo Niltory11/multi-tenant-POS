@@ -12,11 +12,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Automatically set the current date
     $expenseDateForDB = date('Y-m-d');
 
+    // Get tenant_id from logged-in user session
+    $tenant_id = isset($_SESSION['loggedInUser']['tenant_id']) ? $_SESSION['loggedInUser']['tenant_id'] : 'default';
+    
     // Insert the expense into the database (MySQLi)
-    $query = "INSERT INTO expenses (expense_date, category, amount, due, paid, description, created_at) 
-              VALUES (?, ?, ?, ?, ?, ?, NOW())";
+    $query = "INSERT INTO expenses (expense_date, category, amount, due, paid, description, tenant_id, created_at) 
+              VALUES (?, ?, ?, ?, ?, ?, ?, NOW())";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param('ssddds', $expenseDateForDB, $expenseCategory, $expenseAmount, $expenseDue, $expensePaid, $expenseDescription);
+    $stmt->bind_param('ssdddss', $expenseDateForDB, $expenseCategory, $expenseAmount, $expenseDue, $expensePaid, $expenseDescription, $tenant_id);
 
     // Execute the query and display appropriate messages
     if ($stmt->execute()) {

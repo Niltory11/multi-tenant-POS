@@ -11,7 +11,9 @@
             <?php alertMessage(); ?>
 
             <?php
-            $admins = getAll('admins');
+            // Get tenant_id from logged-in user session for filtering
+            $tenant_id = isset($_SESSION['loggedInUser']['tenant_id']) ? $_SESSION['loggedInUser']['tenant_id'] : 'default';
+            $admins = getAll('admins', null, $tenant_id);
             if(!$admins){
                 echo '<h4>Something Went Wrong!</h4>';
                 return false;
@@ -29,6 +31,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Is Ban</th>
+                            <th>Role</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -47,6 +50,7 @@
                                     }
                                 ?>
                             </td>
+                            <td><?= $adminItem['role'] ?></td>
                             <td>
                               <!--  <a href="admins-edit.php?id=<?= $adminItem['id']; ?>" class="btn btn-success btn-sm">Edit</a> -->
                                 <a href="admins-delete.php?id=<?= $adminItem['id']; ?>" class="btn btn-danger btn-sm">Delete</a>
