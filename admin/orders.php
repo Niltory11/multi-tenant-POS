@@ -46,67 +46,74 @@
                 $paymentStatus = validate($_GET['payment_status']);
 
                 if($fromDate != '' && $toDate != '' && $paymentStatus == ''){
+                    $tenant_id = $_SESSION['loggedInUser']['tenant_id'];
                     $query = "SELECT o.*, c.*, oi.quantity, p.minimum_sale_rate
                               FROM orders o
-                              LEFT JOIN customers c ON c.id = o.customer_id
-                              LEFT JOIN order_items oi ON oi.order_id = o.id
-                              LEFT JOIN products p ON p.id = oi.product_id
-                              WHERE o.order_date BETWEEN '$fromDate' AND '$toDate' AND o.tenant_id = '" . $_SESSION['loggedInUser']['tenant_id'] . "'
+                              LEFT JOIN customers c ON c.id = o.customer_id AND c.tenant_id = '$tenant_id'
+                              LEFT JOIN order_items oi ON oi.order_id = o.id AND oi.tenant_id = '$tenant_id'
+                              LEFT JOIN products p ON p.id = oi.product_id AND p.tenant_id = '$tenant_id'
+                              WHERE o.order_date BETWEEN '$fromDate' AND '$toDate' AND o.tenant_id = '$tenant_id'
                               ORDER BY o.id DESC";
 
                 } elseif($fromDate != '' && $toDate != '' && $paymentStatus != '') {
+                    $tenant_id = $_SESSION['loggedInUser']['tenant_id'];
                     $query = "SELECT o.*, c.*, oi.quantity, p.minimum_sale_rate
                               FROM orders o
-                              LEFT JOIN customers c ON c.id = o.customer_id
-                              LEFT JOIN order_items oi ON oi.order_id = o.id
-                              LEFT JOIN products p ON p.id = oi.product_id
+                              LEFT JOIN customers c ON c.id = o.customer_id AND c.tenant_id = '$tenant_id'
+                              LEFT JOIN order_items oi ON oi.order_id = o.id AND oi.tenant_id = '$tenant_id'
+                              LEFT JOIN products p ON p.id = oi.product_id AND p.tenant_id = '$tenant_id'
                               WHERE o.order_date BETWEEN '$fromDate' AND '$toDate' 
-                              AND o.payment_mode='$paymentStatus' AND o.tenant_id = '" . $_SESSION['loggedInUser']['tenant_id'] . "'
+                              AND o.payment_mode='$paymentStatus' AND o.tenant_id = '$tenant_id'
                               ORDER BY o.id DESC";
 
                 } elseif ($fromDate != '' && $toDate == '' && $paymentStatus == '') {
+                    $tenant_id = $_SESSION['loggedInUser']['tenant_id'];
                     $query = "SELECT o.*, c.*, oi.quantity, p.minimum_sale_rate
                               FROM orders o
-                              LEFT JOIN customers c ON c.id = o.customer_id
-                              LEFT JOIN order_items oi ON oi.order_id = o.id
-                              LEFT JOIN products p ON p.id = oi.product_id
-                              WHERE o.order_date >= '$fromDate' AND o.tenant_id = '" . $_SESSION['loggedInUser']['tenant_id'] . "'
+                              LEFT JOIN customers c ON c.id = o.customer_id AND c.tenant_id = '$tenant_id'
+                              LEFT JOIN order_items oi ON oi.order_id = o.id AND oi.tenant_id = '$tenant_id'
+                              LEFT JOIN products p ON p.id = oi.product_id AND p.tenant_id = '$tenant_id'
+                              WHERE o.order_date >= '$fromDate' AND o.tenant_id = '$tenant_id'
                               ORDER BY o.id DESC";
 
                 } elseif ($fromDate == '' && $toDate != '' && $paymentStatus == '') {
+                    $tenant_id = $_SESSION['loggedInUser']['tenant_id'];
                     $query = "SELECT o.*, c.*, oi.quantity, p.minimum_sale_rate
                               FROM orders o
-                              LEFT JOIN customers c ON c.id = o.customer_id
-                              LEFT JOIN order_items oi ON oi.order_id = o.id
-                              LEFT JOIN products p ON p.id = oi.product_id
-                              WHERE o.order_date <= '$toDate' AND o.tenant_id = '" . $_SESSION['loggedInUser']['tenant_id'] . "'
+                              LEFT JOIN customers c ON c.id = o.customer_id AND c.tenant_id = '$tenant_id'
+                              LEFT JOIN order_items oi ON oi.order_id = o.id AND oi.tenant_id = '$tenant_id'
+                              LEFT JOIN products p ON p.id = oi.product_id AND p.tenant_id = '$tenant_id'
+                              WHERE o.order_date <= '$toDate' AND o.tenant_id = '$tenant_id'
                               ORDER BY o.id DESC";
 
                 } elseif ($paymentStatus != '') {
+                    $tenant_id = $_SESSION['loggedInUser']['tenant_id'];
                     $query = "SELECT o.*, c.*, oi.quantity, p.minimum_sale_rate
                               FROM orders o
-                              LEFT JOIN customers c ON c.id = o.customer_id
-                              LEFT JOIN order_items oi ON oi.order_id = o.id
-                              LEFT JOIN products p ON p.id = oi.product_id
-                              WHERE o.payment_mode='$paymentStatus' AND o.tenant_id = '" . $_SESSION['loggedInUser']['tenant_id'] . "'
+                              LEFT JOIN customers c ON c.id = o.customer_id AND c.tenant_id = '$tenant_id'
+                              LEFT JOIN order_items oi ON oi.order_id = o.id AND oi.tenant_id = '$tenant_id'
+                              LEFT JOIN products p ON p.id = oi.product_id AND p.tenant_id = '$tenant_id'
+                              WHERE o.payment_mode='$paymentStatus' AND o.tenant_id = '$tenant_id'
                               ORDER BY o.id DESC";
 
                 } else {
+                    $tenant_id = $_SESSION['loggedInUser']['tenant_id'];
                     $query = "SELECT o.*, c.*, oi.quantity, p.minimum_sale_rate
                               FROM orders o
-                              LEFT JOIN customers c ON c.id = o.customer_id
-                              LEFT JOIN order_items oi ON oi.order_id = o.id
-                              LEFT JOIN products p ON p.id = oi.product_id
-                              WHERE o.tenant_id = '" . $_SESSION['loggedInUser']['tenant_id'] . "'
+                              LEFT JOIN customers c ON c.id = o.customer_id AND c.tenant_id = '$tenant_id'
+                              LEFT JOIN order_items oi ON oi.order_id = o.id AND oi.tenant_id = '$tenant_id'
+                              LEFT JOIN products p ON p.id = oi.product_id AND p.tenant_id = '$tenant_id'
+                              WHERE o.tenant_id = '$tenant_id'
                               ORDER BY o.id DESC";
                 }
             } else {
+                $tenant_id = $_SESSION['loggedInUser']['tenant_id'];
                 $query = "SELECT o.*, c.*, oi.quantity, p.minimum_sale_rate
                           FROM orders o
-                          LEFT JOIN customers c ON c.id = o.customer_id
-                          LEFT JOIN order_items oi ON oi.order_id = o.id
-                          LEFT JOIN products p ON p.id = oi.product_id
-                          WHERE o.tenant_id = '" . $_SESSION['loggedInUser']['tenant_id'] . "'
+                          LEFT JOIN customers c ON c.id = o.customer_id AND c.tenant_id = '$tenant_id'
+                          LEFT JOIN order_items oi ON oi.order_id = o.id AND oi.tenant_id = '$tenant_id'
+                          LEFT JOIN products p ON p.id = oi.product_id AND p.tenant_id = '$tenant_id'
+                          WHERE o.tenant_id = '$tenant_id'
                           ORDER BY o.id DESC";
             }
             $orders = mysqli_query($conn, $query);
@@ -141,7 +148,7 @@
                                     <td><?= date('d M, Y', strtotime($orderItem['order_date'])); ?></td>
                                     <td><?= $orderItem['order_status']; ?></td>
                                     <td><?= $orderItem['delivery_date']; ?></td>
-                                    <td><?= $orderItem['total_amount']; ?></td>
+                                    <td><?= number_format($orderItem['total_amount'], 2); ?></td>
                                     <td>
                                         <a href="orders-view.php?track=<?= $orderItem['tracking_no']; ?>" class="btn btn-info mb-0 px-2 btn-sm">View</a>
                                         <a href="orders-view-print.php?track=<?= $orderItem['tracking_no']; ?>" class="btn btn-primary mb-0 px-2 btn-sm">Print</a>

@@ -27,9 +27,12 @@
 
                 $trackingNo = validate($_GET['track']);
 
+                // Get tenant_id from logged-in user session for filtering
+                $tenant_id = $_SESSION['loggedInUser']['tenant_id'];
+                
                 $query = "SELECT o.*, c.* FROM orders o, customers c 
                           WHERE c.id = o.customer_id AND tracking_no='$trackingNo' 
-                          AND o.tenant_id = '" . $_SESSION['loggedInUser']['tenant_id'] . "'
+                          AND o.tenant_id = '$tenant_id' AND c.tenant_id = '$tenant_id'
                           ORDER BY o.id DESC";
 
                 $orders = mysqli_query($conn, $query);
@@ -92,7 +95,8 @@
                                                 oi.discount as orderItemDiscount,
                                                 o.*, oi.*, p.* 
                                            FROM orders as o, order_items as oi, products as p
-                                           WHERE oi.order_id = o.id AND p.id = oi.product_id AND o.tracking_no='$trackingNo'";
+                                           WHERE oi.order_id = o.id AND p.id = oi.product_id AND o.tracking_no='$trackingNo' 
+                                           AND o.tenant_id = '$tenant_id' AND oi.tenant_id = '$tenant_id' AND p.tenant_id = '$tenant_id'";
                         
                         $orderItemsRes = mysqli_query($conn, $orderItemQuery);
                         $totalDue = 0; // Initialize total due
@@ -133,7 +137,7 @@
                                                         <?= $orderItemRow['orderItemQuantity']; ?>
                                                     </td>
                                                     <td width="15%" class="fw-bold text-center">
-                                                        <?= number_format(($orderItemRow['orderItemPrice'] * $orderItemRow['orderItemQuantity']), 2) ?>
+                                                        <?= number_format(($orderItemRow['orderItemPrice'] * $orderItemRow['orderItemQuantity']) - $orderItemRow['orderItemDiscount'], 2) ?>
                                                     </td>
                                                     <td width="15%" class="fw-bold text-center">
                                                         <?= number_format($orderItemRow['orderItemDiscount'], 2); ?>

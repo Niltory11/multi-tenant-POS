@@ -21,11 +21,14 @@
                     exit;
                 }
 
+                // Get tenant_id from logged-in user session for filtering
+                $tenant_id = isset($_SESSION['loggedInUser']['tenant_id']) ? $_SESSION['loggedInUser']['tenant_id'] : 'default';
+                
                 // Fetch order details
                 $orderQuery = "SELECT o.*, c.name AS customer_name, c.phone AS customer_phone, c.email AS customer_email 
                                FROM orders o 
                                JOIN customers c ON o.customer_id = c.id 
-                               WHERE o.tracking_no = '$trackingNo'";
+                               WHERE o.tracking_no = '$trackingNo' AND o.tenant_id = '$tenant_id' AND c.tenant_id = '$tenant_id'";
                 $orderResult = mysqli_query($conn, $orderQuery);
 
                 if (!$orderResult || mysqli_num_rows($orderResult) == 0) {
@@ -39,7 +42,7 @@
                 $orderItemsQuery = "SELECT oi.*, p.name AS product_name 
                                     FROM order_items oi 
                                     JOIN products p ON oi.product_id = p.id 
-                                    WHERE oi.order_id = '{$order['id']}'";
+                                    WHERE oi.order_id = '{$order['id']}' AND oi.tenant_id = '$tenant_id' AND p.tenant_id = '$tenant_id'";
                 $orderItemsResult = mysqli_query($conn, $orderItemsQuery);
 
                 if (!$orderItemsResult) {
