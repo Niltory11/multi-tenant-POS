@@ -1,0 +1,199 @@
+[2025-11-21 19:51:49] Request to SSLCommerz:
+Array
+(
+    [store_id] => space690dbf2e094ab
+    [store_passwd] => space690dbf2e094ab@ssl
+    [total_amount] => 2900
+    [currency] => BDT
+    [tran_id] => TENANT_6920b4c5ef0580.96501753
+    [success_url] => http://localhost/multiPOS/sslcommerz/success.php
+    [fail_url] => http://localhost/multiPOS/sslcommerz/fail_and_cancel.php
+    [cancel_url] => http://localhost/multiPOS/sslcommerz/fail_and_cancel.php
+    [cus_name] => new
+    [cus_email] => new@gmail.com
+    [cus_add1] => 34 Rongdhonu, Shibganj, Sylhet
+    [cus_city] => N/A
+    [cus_postcode] => N/A
+    [cus_country] => Bangladesh
+    [cus_phone] => 01613805702
+)
+
+-------------------
+[2025-11-21 20:07:17] Request to SSLCommerz:
+Array
+(
+    [store_id] => space690dbf2e094ab
+    [store_passwd] => space690dbf2e094ab@ssl
+    [total_amount] => 2900
+    [currency] => BDT
+    [tran_id] => TENANT_6920b86515bb00.04924238
+    [success_url] => http://localhost/multiPOS/sslcommerz/success.php
+    [fail_url] => http://localhost/multiPOS/sslcommerz/fail_and_cancel.php
+    [cancel_url] => http://localhost/multiPOS/sslcommerz/fail_and_cancel.php
+    [cus_name] => rest
+    [cus_email] => rest@gmail.com
+    [cus_add1] => 34 Rongdhonu, Shibganj, Sylhet
+    [cus_city] => N/A
+    [cus_postcode] => N/A
+    [cus_country] => Bangladesh
+    [cus_phone] => 01613805702
+)
+
+-------------------
+[2025-11-21 20:20:54] Request to SSLCommerz:
+Array
+(
+    [store_id] => space690dbf2e094ab
+    [store_passwd] => space690dbf2e094ab@ssl
+    [total_amount] => 2900
+    [currency] => BDT
+    [tran_id] => TENANT_6920bb961b07e8.54577279
+    [success_url] => http://localhost/multiPOS/sslcommerz/success.php
+    [fail_url] => http://localhost/multiPOS/sslcommerz/fail_and_cancel.php
+    [cancel_url] => http://localhost/multiPOS/sslcommerz/fail_and_cancel.php
+    [cus_name] => neo
+    [cus_email] => neo@gmail.com
+    [cus_add1] => 34 Rongdhonu, Shibganj, Sylhet
+    [cus_city] => Dhaka
+    [cus_postcode] => 1000
+    [cus_country] => Bangladesh
+    [cus_phone] => 01613805702
+    [shipping_method] => NO
+    [num_of_item] => 1
+    [product_name] => MultiPOS Subscription - BASIC
+    [product_category] => Software
+    [product_profile] => non-physical-goods
+    [emi_option] => 0
+)
+
+-------------------
+[2025-11-21 20:31:48] Request to SSLCommerz:
+Array
+(
+    [store_id] => space690dbf2e094ab
+    [store_passwd] => space690dbf2e094ab@ssl
+    [total_amount] => 5900
+    [currency] => BDT
+    [tran_id] => TENANT_6920be2472e689.78327284
+    [success_url] => http://localhost/multiPOS/sslcommerz/success.php
+    [fail_url] => http://localhost/multiPOS/sslcommerz/fail_and_cancel.php
+    [cancel_url] => http://localhost/multiPOS/sslcommerz/fail_and_cancel.php
+    [cus_name] => lastTest
+    [cus_email] => lastTest@gmail.com
+    [cus_add1] => 34 Rongdhonu, Shibganj, Sylhet
+    [cus_city] => Dhaka
+    [cus_postcode] => 1000
+    [cus_country] => Bangladesh
+    [cus_phone] => 01613805702
+    [shipping_method] => NO
+    [num_of_item] => 1
+    [product_name] => MultiPOS Subscription - PREMIUM
+    [product_category] => Software
+    [product_profile] => non-physical-goods
+    [emi_option] => 0
+)
+
+-------------------
+[2025-11-21 20:43:20] Request to SSLCommerz:
+Array
+(
+    [store_id] => space690dbf2e094ab
+    [store_passwd] => space690dbf2e094ab@ssl
+    [total_amount] => 9900
+    [currency] => BDT
+    [tran_id] => TENANT_6920c0d8478907.07861463
+    [success_url] => http://localhost/multiPOS/sslcommerz/success.php
+    [fail_url] => http://localhost/multiPOS/sslcommerz/fail_and_cancel.php
+    [cancel_url] => http://localhost/multiPOS/sslcommerz/fail_and_cancel.php
+    [cus_country] => Bangladesh
+    [cus_phone] => 01613805702
+    [shipping_method] => NO
+    [num_of_item] => 1
+    [product_name] => MultiPOS Subscription - ENTERPRISE
+    [product_category] => Software
+    [product_profile] => non-physical-goods
+    [emi_option] => 0
+)
+
+-------------------
+[2025-11-21 20:44:57] Request to SSLCommerz:
+Array
+(
+    [store_id] => space690dbf2e094ab
+    [store_passwd] => space690dbf2e094ab@ssl
+    [total_amount] => 5900
+    [currency] => BDT
+    [tran_id] => TENANT_6920c139919055.07733151
+    [success_url] => http://localhost/multiPOS/sslcommerz/success.php
+    [fail_url] => http://localhost/multiPOS/sslcommerz/fail_and_cancel.php
+    [cancel_url] => http://localhost/multiPOS/sslcommerz/fail_and_cancel.php
+    [cus_name] => a
+    [cus_email] => a@gmal.com
+    [cus_add1] => 34 Rongdhonu, Shibganj, Sylhet
+    [cus_city] => Dhaka
+    [cus_postcode] => 1000
+    [cus_country] => Bangladesh
+    [cus_phone] => 01613805702
+    [shipping_method] => NO
+    [num_of_item] => 1
+    [product_name] => MultiPOS Subscription - PREMIUM
+    [product_category] => Software
+    [product_profile] => non-physical-goods
+    [emi_option] => 0
+)
+
+-------------------
+[2025-11-21 20:53:17] Request to SSLCommerz:
+Array
+(
+    [store_id] => space690dbf2e094ab
+    [store_passwd] => space690dbf2e094ab@ssl
+    [total_amount] => 9900
+    [currency] => BDT
+    [tran_id] => TENANT_6920c32d089b28.58114483
+    [success_url] => http://localhost/multiPOS/sslcommerz/success.php
+    [fail_url] => http://localhost/multiPOS/sslcommerz/fail_and_cancel.php
+    [cancel_url] => http://localhost/multiPOS/sslcommerz/fail_and_cancel.php
+    [cus_name] => b
+    [cus_email] => b@gmail.com
+    [cus_add1] => 34 Rongdhonu, Shibganj, Sylhet
+    [cus_city] => Dhaka
+    [cus_postcode] => 1000
+    [cus_country] => Bangladesh
+    [cus_phone] => 01613805702
+    [shipping_method] => NO
+    [num_of_item] => 1
+    [product_name] => MultiPOS Subscription - ENTERPRISE
+    [product_category] => Software
+    [product_profile] => non-physical-goods
+    [emi_option] => 0
+)
+
+-------------------
+[2025-11-21 20:57:56] Request to SSLCommerz:
+Array
+(
+    [store_id] => space690dbf2e094ab
+    [store_passwd] => space690dbf2e094ab@ssl
+    [total_amount] => 2900
+    [currency] => BDT
+    [tran_id] => TENANT_6920c4442bbce8.16844429
+    [success_url] => http://localhost/multiPOS/sslcommerz/success.php
+    [fail_url] => http://localhost/multiPOS/sslcommerz/fail_and_cancel.php
+    [cancel_url] => http://localhost/multiPOS/sslcommerz/fail_and_cancel.php
+    [cus_name] => gg
+    [cus_email] => gg@gmail.com
+    [cus_add1] => 34 Rongdhonu, Shibganj, Sylhet
+    [cus_city] => Dhaka
+    [cus_postcode] => 1000
+    [cus_country] => Bangladesh
+    [cus_phone] => 01613805702
+    [shipping_method] => NO
+    [num_of_item] => 1
+    [product_name] => MultiPOS Subscription - BASIC
+    [product_category] => Software
+    [product_profile] => non-physical-goods
+    [emi_option] => 0
+)
+
+-------------------

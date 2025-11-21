@@ -1,0 +1,239 @@
+[2025-11-21 20:25:06] Success page hit. POST: Array
+(
+    [tran_id] => TENANT_6920bb961b07e8.54577279
+    [val_id] => 251122125091IDefoN2BQbnHRQ
+    [amount] => 2900.00
+    [card_type] => VISA-Dutch Bangla
+    [store_amount] => 2827.50
+    [card_no] => 432155******9342
+    [bank_tran_id] => 251122125090j1Tzudi7FENoQG
+    [status] => VALID
+    [tran_date] => 2025-11-22 01:20:59
+    [error] => 
+    [currency] => BDT
+    [card_issuer] => STANDARD CHARTERED BANK
+    [card_brand] => VISA
+    [card_sub_brand] => Classic
+    [card_issuer_country] => Bangladesh
+    [card_issuer_country_code] => BD
+    [store_id] => space690dbf2e094ab
+    [verify_sign] => d7ff6ef4e0200d6bc7a6daa6e554e0df
+    [verify_key] => amount,bank_tran_id,base_fair,card_brand,card_issuer,card_issuer_country,card_issuer_country_code,card_no,card_sub_brand,card_type,currency,currency_amount,currency_rate,currency_type,error,risk_level,risk_title,status,store_amount,store_id,tran_date,tran_id,val_id,value_a,value_b,value_c,value_d
+    [verify_sign_sha2] => 351b78b05ffcc5345df445491c2773e0e129b7dd1936d45fbacad3210f278b34
+    [currency_type] => BDT
+    [currency_amount] => 2900.00
+    [currency_rate] => 1.0000
+    [base_fair] => 0.00
+    [value_a] => 
+    [value_b] => 
+    [value_c] => 
+    [value_d] => 
+    [subscription_id] => 
+    [risk_level] => 0
+    [risk_title] => Safe
+)
+
+[2025-11-21 20:25:06] Session 'pending_tenant' is empty. Session ID: u2sphc45b58jln9sai7o4hi5l2
+[2025-11-21 20:32:03] Success page hit. POST: Array
+(
+    [tran_id] => TENANT_6920be2472e689.78327284
+    [val_id] => 25112213207sSXKmfk3yDiNgSY
+    [amount] => 5900.00
+    [card_type] => VISA-Dutch Bangla
+    [store_amount] => 5752.50
+    [card_no] => 434977******9753
+    [bank_tran_id] => 251122132070ncRKCr4A1UDmlJ
+    [status] => VALID
+    [tran_date] => 2025-11-22 01:31:54
+    [error] => 
+    [currency] => BDT
+    [card_issuer] => EASTERN BANK, LTD.
+    [card_brand] => VISA
+    [card_sub_brand] => Classic
+    [card_issuer_country] => Bangladesh
+    [card_issuer_country_code] => BD
+    [store_id] => space690dbf2e094ab
+    [verify_sign] => 9ad94b8644b986548bf2491435d48c27
+    [verify_key] => amount,bank_tran_id,base_fair,card_brand,card_issuer,card_issuer_country,card_issuer_country_code,card_no,card_sub_brand,card_type,currency,currency_amount,currency_rate,currency_type,error,risk_level,risk_title,status,store_amount,store_id,tran_date,tran_id,val_id,value_a,value_b,value_c,value_d
+    [verify_sign_sha2] => 4e7de16cde96b904e93cb7199b087de039110aa4fee05e02191d6c6b4bb5e920
+    [currency_type] => BDT
+    [currency_amount] => 5900.00
+    [currency_rate] => 1.0000
+    [base_fair] => 0.00
+    [value_a] => 
+    [value_b] => 
+    [value_c] => 
+    [value_d] => 
+    [subscription_id] => 
+    [risk_level] => 0
+    [risk_title] => Safe
+)
+
+[2025-11-21 20:32:03] Session 'pending_tenant' is empty. Session ID: 9uj45lnolk3158vci5iolm38sl
+[2025-11-21 20:47:56] Success page hit. POST: Array
+(
+    [tran_id] => TENANT_6920c139919055.07733151
+    [val_id] => 251122146330a3gDKH92hhoODi
+    [amount] => 5900.00
+    [card_type] => VISA-Dutch Bangla
+    [store_amount] => 5752.50
+    [card_no] => 432155XXXXXX7491
+    [bank_tran_id] => 251122146331CLFA5DHDeyueig
+    [status] => VALID
+    [tran_date] => 2025-11-22 01:46:33
+    [error] => 
+    [currency] => BDT
+    [card_issuer] => STANDARD CHARTERED BANK
+    [card_brand] => VISA
+    [card_sub_brand] => Classic
+    [card_issuer_country] => Bangladesh
+    [card_issuer_country_code] => BD
+    [store_id] => space690dbf2e094ab
+    [verify_sign] => e03ee9e3fa56ae50185dc312fa99cd7c
+    [verify_key] => amount,bank_tran_id,base_fair,card_brand,card_issuer,card_issuer_country,card_issuer_country_code,card_no,card_sub_brand,card_type,currency,currency_amount,currency_rate,currency_type,error,risk_level,risk_title,status,store_amount,store_id,tran_date,tran_id,val_id,value_a,value_b,value_c,value_d
+    [verify_sign_sha2] => ae7ea380c5008234e8586f3552ce232568fa6040273748ff76bf8d3e2744af5e
+    [currency_type] => 
+    [currency_amount] => 
+    [currency_rate] => 
+    [base_fair] => 
+    [value_a] => 
+    [value_b] => 
+    [value_c] => 
+    [value_d] => 
+    [subscription_id] => 
+    [risk_level] => 0
+    [risk_title] => Safe
+)
+
+[2025-11-21 20:47:56] Recovering tenant data from backup file: C:\xampp\htdocs\multiPOS\sslcommerz/../temp_tenants/TENANT_6920c139919055.07733151.json
+[2025-11-21 20:47:56] Validation successful. Creating tenant...
+[2025-11-21 20:47:56] Tenant inserted: 
+[2025-11-21 20:47:56] Admin inserted.
+[2025-11-21 20:47:56] Transaction committed. Logging in user...
+[2025-11-21 20:47:56] Redirecting to admin/index.php
+[2025-11-21 20:51:17] Success page hit. POST: Array
+(
+    [tran_id] => TENANT_6920c139919055.07733151
+    [val_id] => 251122146330a3gDKH92hhoODi
+    [amount] => 5900.00
+    [card_type] => VISA-Dutch Bangla
+    [store_amount] => 5752.50
+    [card_no] => 432155XXXXXX7491
+    [bank_tran_id] => 251122146331CLFA5DHDeyueig
+    [status] => VALID
+    [tran_date] => 2025-11-22 01:46:33
+    [error] => 
+    [currency] => BDT
+    [card_issuer] => STANDARD CHARTERED BANK
+    [card_brand] => VISA
+    [card_sub_brand] => Classic
+    [card_issuer_country] => Bangladesh
+    [card_issuer_country_code] => BD
+    [store_id] => space690dbf2e094ab
+    [verify_sign] => e03ee9e3fa56ae50185dc312fa99cd7c
+    [verify_key] => amount,bank_tran_id,base_fair,card_brand,card_issuer,card_issuer_country,card_issuer_country_code,card_no,card_sub_brand,card_type,currency,currency_amount,currency_rate,currency_type,error,risk_level,risk_title,status,store_amount,store_id,tran_date,tran_id,val_id,value_a,value_b,value_c,value_d
+    [verify_sign_sha2] => ae7ea380c5008234e8586f3552ce232568fa6040273748ff76bf8d3e2744af5e
+    [currency_type] => 
+    [currency_amount] => 
+    [currency_rate] => 
+    [base_fair] => 
+    [value_a] => 
+    [value_b] => 
+    [value_c] => 
+    [value_d] => 
+    [subscription_id] => 
+    [risk_level] => 0
+    [risk_title] => Safe
+)
+
+[2025-11-21 20:51:17] Recovering tenant data from backup file: C:\xampp\htdocs\multiPOS\sslcommerz/../temp_tenants/TENANT_6920c139919055.07733151.json
+[2025-11-21 20:51:17] Pending tenant found: a@gmal.com
+[2025-11-21 20:51:17] Validation successful. Creating tenant...
+[2025-11-21 20:51:17] Tenant inserted: a
+[2025-11-21 20:51:17] Admin inserted.
+[2025-11-21 20:51:17] Transaction committed. Logging in user...
+[2025-11-21 20:51:17] Redirecting to admin/index.php
+[2025-11-21 20:53:30] Success page hit. POST: Array
+(
+    [tran_id] => TENANT_6920c32d089b28.58114483
+    [val_id] => 25112215334wUuJyR8GkPHOVhA
+    [amount] => 9900.00
+    [card_type] => VISA-Dutch Bangla
+    [store_amount] => 9652.50
+    [card_no] => 450850******4050
+    [bank_tran_id] => 25112215334cOR47TAhqbilSnh
+    [status] => VALID
+    [tran_date] => 2025-11-22 01:53:22
+    [error] => 
+    [currency] => BDT
+    [card_issuer] => CAJA DE AHORROS Y PENSIONES DE BARCELONA(LA CAIXA)
+    [card_brand] => VISA
+    [card_sub_brand] => Classic
+    [card_issuer_country] => Spain
+    [card_issuer_country_code] => ES
+    [store_id] => space690dbf2e094ab
+    [verify_sign] => 65101d1d37ea8027993429eed055b7df
+    [verify_key] => amount,bank_tran_id,base_fair,card_brand,card_issuer,card_issuer_country,card_issuer_country_code,card_no,card_sub_brand,card_type,currency,currency_amount,currency_rate,currency_type,error,risk_level,risk_title,status,store_amount,store_id,tran_date,tran_id,val_id,value_a,value_b,value_c,value_d
+    [verify_sign_sha2] => 69f47cbca7c6393f830a316095f8906f6a87d9562707bb4d8ae7cbd78aa05cfb
+    [currency_type] => BDT
+    [currency_amount] => 9900.00
+    [currency_rate] => 1.0000
+    [base_fair] => 0.00
+    [value_a] => 
+    [value_b] => 
+    [value_c] => 
+    [value_d] => 
+    [subscription_id] => 
+    [risk_level] => 1
+    [risk_title] => Not Safe
+)
+
+[2025-11-21 20:53:30] Recovering tenant data from backup file: C:\xampp\htdocs\multiPOS\sslcommerz/../temp_tenants/TENANT_6920c32d089b28.58114483.json
+[2025-11-21 20:53:30] Pending tenant found: b@gmail.com
+[2025-11-21 20:53:31] Validation successful. Creating tenant...
+[2025-11-21 20:53:31] Tenant inserted: b
+[2025-11-21 20:53:31] Admin inserted.
+[2025-11-21 20:53:31] Transaction committed. Logging in user...
+[2025-11-21 20:53:31] Redirecting to admin/index.php
+[2025-11-21 20:58:08] Success page hit. POST: Array
+(
+    [tran_id] => TENANT_6920c4442bbce8.16844429
+    [val_id] => 25112215811ZwmL5RhqbAUdoZW
+    [amount] => 2900.00
+    [card_type] => BKASH-BKash
+    [store_amount] => 2827.50
+    [card_no] => 
+    [bank_tran_id] => 2511221581115H9Z8bkkpqrV4s
+    [status] => VALID
+    [tran_date] => 2025-11-22 01:58:01
+    [error] => 
+    [currency] => BDT
+    [card_issuer] => BKash Mobile Banking
+    [card_brand] => MOBILEBANKING
+    [card_sub_brand] => Classic
+    [card_issuer_country] => Bangladesh
+    [card_issuer_country_code] => BD
+    [store_id] => space690dbf2e094ab
+    [verify_sign] => 740d6c3888d17e3354ee63cca17a72f5
+    [verify_key] => amount,bank_tran_id,base_fair,card_brand,card_issuer,card_issuer_country,card_issuer_country_code,card_no,card_sub_brand,card_type,currency,currency_amount,currency_rate,currency_type,error,risk_level,risk_title,status,store_amount,store_id,tran_date,tran_id,val_id,value_a,value_b,value_c,value_d
+    [verify_sign_sha2] => c0e61deed4f949426497de83570eaa6c5e493cf977ba18cbfd8a4516fd354f89
+    [currency_type] => BDT
+    [currency_amount] => 2900.00
+    [currency_rate] => 1.0000
+    [base_fair] => 0.00
+    [value_a] => 
+    [value_b] => 
+    [value_c] => 
+    [value_d] => 
+    [subscription_id] => 
+    [risk_level] => 0
+    [risk_title] => Safe
+)
+
+[2025-11-21 20:58:08] Recovering tenant data from backup file: C:\xampp\htdocs\multiPOS\sslcommerz/../temp_tenants/TENANT_6920c4442bbce8.16844429.json
+[2025-11-21 20:58:08] Pending tenant found: gg@gmail.com
+[2025-11-21 20:58:09] Validation successful. Creating tenant...
+[2025-11-21 20:58:09] Tenant inserted: gg
+[2025-11-21 20:58:09] Admin inserted.
+[2025-11-21 20:58:09] Transaction committed. Logging in user...
+[2025-11-21 20:58:09] Redirecting to admin/index.php

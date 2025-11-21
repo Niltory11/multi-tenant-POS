@@ -71,82 +71,24 @@ if (isset($_POST['registerTenant'])) {
         }
     }
     
-    // Hash the admin password
-    $hashed_password = password_hash($admin_password, PASSWORD_BCRYPT);
-    
-    // Start transaction
-    mysqli_begin_transaction($conn);
-    
-    try {
-        // Insert tenant data
-        $tenantData = [
-            'tenant_id' => $tenant_id,
-            'company_name' => $company_name,
-            'company_email' => $company_email,
-            'company_phone' => $company_phone,
-            'company_address' => $company_address,
-            'subscription_plan' => $subscription_plan,
-            'subscription_status' => 'active'
-        ];
-        
-        $tenantResult = insert('tenants', $tenantData);
-        if (!$tenantResult) {
-            throw new Exception("Failed to create tenant");
-        }
-        
-        // Insert admin data
-        $adminData = [
-            'tenant_id' => $tenant_id,
-            'name' => $admin_name,
-            'email' => $admin_email,
-            'password' => $hashed_password,
-            'phone' => $admin_phone,
-            'role' => 'admin',
-            'is_ban' => 0
-        ];
-        
-        $adminResult = insert('admins', $adminData);
-        if (!$adminResult) {
-            throw new Exception("Failed to create admin");
-        }
-        
-        // Create default tenant settings
-        $defaultSettings = [
-            ['tenant_id' => $tenant_id, 'setting_key' => 'currency', 'setting_value' => 'USD'],
-            ['tenant_id' => $tenant_id, 'setting_key' => 'timezone', 'setting_value' => 'UTC'],
-            ['tenant_id' => $tenant_id, 'setting_key' => 'date_format', 'setting_value' => 'Y-m-d'],
-            ['tenant_id' => $tenant_id, 'setting_key' => 'company_logo', 'setting_value' => '']
-        ];
-        
-        foreach ($defaultSettings as $setting) {
-            insert('tenant_settings', $setting);
-        }
-        
-        // Commit transaction
-        mysqli_commit($conn);
-        
-        // Auto-login the admin
-        $_SESSION['loggedIn'] = true;
-        $_SESSION['loggedInUser'] = [
-            'user_id' => mysqli_insert_id($conn),
-            'name' => $admin_name,
-            'email' => $admin_email,
-            'role' => 'admin',
-            'tenant_id' => $tenant_id
-        ];
-        
-        // Redirect to admin dashboard
-        header("Location: admin/index.php");
-        exit();
-        
-    } catch (Exception $e) {
-        // Rollback transaction
-        mysqli_rollback($conn);
-        $_SESSION['status'] = "Registration failed: " . $e->getMessage();
-        header("Location: tenant-register.php");
-        exit();
-    }
-    
+    // Instead of creating tenant immediately, store data in session
+    // and redirect to SSLCommerz checkout for payment.
+
+    $_SESSION['pending_tenant'] = [
+        'company_name'      => $company_name,
+        'company_email'     => $company_email,
+        'company_phone'     => $company_phone,
+        'company_address'   => $company_address,
+        'subscription_plan' => $subscription_plan,
+        'admin_name'        => $admin_name,
+        'admin_email'       => $admin_email,
+        'admin_password'    => $admin_password, // will be hashed after payment success
+        'admin_phone'       => $admin_phone,
+    ];
+
+    header('Location: sslcommerz/checkout.php');
+    exit();
+
 } else {
     $_SESSION['status'] = "Unauthorized Access!";
     header("Location: tenant-register.php");

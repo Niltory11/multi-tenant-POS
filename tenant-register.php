@@ -50,8 +50,8 @@ if (isset($_SESSION['loggedIn'])) {
                                 </div>
                                 
                                 <div class="col-md-6 mb-3">
-                                    <label for="company_phone">Company Phone</label>
-                                    <input type="text" name="company_phone" class="form-control" 
+                                    <label for="company_phone">Company Phone *</label>
+                                    <input type="text" name="company_phone" required class="form-control" 
                                            placeholder="Enter company phone" />
                                 </div>
                                 
